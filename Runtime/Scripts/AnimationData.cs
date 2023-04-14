@@ -84,7 +84,7 @@ namespace GLTFast {
                     break;
                 case string p when p.StartsWith("/extensions/KHR_lights_punctual/lights/"):
                     data.TargetType = TargetType.Light;
-                    data.AnimationClipType = typeof(UnityEngine.Light);
+                    data.AnimationClipType = typeof(AnimatedLight);
                     data.TargetId = ParsePointerTargetId(pointerPath["/extensions/KHR_lights_punctual/lights/".Length..]);
                     data.TargetProperty = pointerPath[$"/extensions/KHR_lights_punctual/lights/{data.TargetId}/".Length..];
                     break;
