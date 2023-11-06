@@ -12,6 +12,7 @@ namespace GLTFast {
     public enum TargetType {
         Unknown = -1,
         Camera,
+        Light,
         Material,
         Mesh,
         Node,
@@ -80,6 +81,12 @@ namespace GLTFast {
                     data.AnimationClipType = typeof(AnimationCameraGameObject);
                     data.TargetId = ParsePointerTargetId(pointerPath["/cameras/".Length..]);
                     data.TargetProperty = pointerPath[$"/cameras/{data.TargetId}/".Length..];
+                    break;
+                case string p when p.StartsWith("/extensions/KHR_lights_punctual/lights/"):
+                    data.TargetType = TargetType.Light;
+                    data.AnimationClipType = typeof(UnityEngine.Light);
+                    data.TargetId = ParsePointerTargetId(pointerPath["/extensions/KHR_lights_punctual/lights/".Length..]);
+                    data.TargetProperty = pointerPath[$"/extensions/KHR_lights_punctual/lights/{data.TargetId}/".Length..];
                     break;
                 case string p when p.StartsWith("/materials/"):
                     data.TargetType = TargetType.Material;
